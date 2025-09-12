@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRM - Pedidos WhatsApp</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="status-indicator">
+                <div class="status-dot"></div>
+                <span>N8N Conectado</span>
+            </div>
+            <h1>🍞 CRM Padaria</h1>
+            <p>Sistema integrado com WhatsApp via N8N</p>
+        </div>
+
+        <div class="main-content">
+            <div class="pedidos-section">
+                <div class="section-title">
+                    📋 Pedidos Pendentes
+                </div>
+                
+                <div class="stats">
+                    <div class="stat-item">
+                        <div class="stat-number" id="pedidos-count">0</div>
+                        <div class="stat-label">Pedidos Ativos</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" id="entregues-count">0</div>
+                        <div class="stat-label">Entregues Hoje</div>
+                    </div>
+                </div>
+
+                <div id="pedidos-container">
+                    <div class="empty-state">
+                        <div style="font-size: 3rem;">📱</div>
+                        <h3>Aguardando mensagens do WhatsApp</h3>
+                        <p>Os pedidos aparecerão aqui automaticamente quando chegarem via N8N</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="entregues-section">
+                <div class="section-title">
+                    ✅ Entregues Esta Semana
+                </div>
+                <div id="entregues-container">
+                    <div class="empty-state">
+                        <div style="font-size: 2rem;">📦</div>
+                        <p>Pedidos entregues aparecerão aqui</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="simulator" onclick="simularMensagem()">
+        🧪 Simular
+    </div>
+
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+</body>
+</html>
