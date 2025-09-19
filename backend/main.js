@@ -39,7 +39,62 @@ app.get("/api/pedidos", async (req, res) => {
   }
 });
 
-// WEBHOOK ADAPTADO PARA IOREDIS
+app.delete("/api/limpar-dados-redis", async (req, res) => {
+  const { nome } = req.body;
+
+  try {
+    if (!nome) {
+      return res.status(400).json({ success: false, message: "O parâmetro 'nome' deve ser fornecido no corpo da requisição." });
+    }
+
+    if (nome.toLowerCase() === "todos") {
+      // Excluir todos os dados
+      await redis.del("pedidos", "entregues");
+      console.log("Todos os dados do Redis excluídos com sucesso.");
+      res.status(200).json({ success: true, message: "Todos os dados do Redis excluídos com sucesso." });
+    } else {
+      // Excluir pedidos de um cliente específico
+      const pedidosStrings = await redis.lrange("pedidos", 0, -1);
+      let todosOsPedidos = pedidosStrings.map(JSON.parse);
+      const pedidosAntes = todosOsPedidos.length;
+
+      const pedidosRestantes = todosOsPedidos.filter(p => p.cliente && p.cliente.toLowerCase() !== nome.toLowerCase());
+      const pedidosDepois = pedidosRestantes.length;
+
+      if (pedidosAntes === pedidosDepois) {
+        // Nenhum pedido encontrado para o nome
+        return res.status(404).json({ success: false, message: `Nenhum pedido encontrado para o cliente: ${nome}` });
+      }
+
+      await redis.del("pedidos");
+      if (pedidosRestantes.length > 0) {
+        const pedidosParaSalvar = pedidosRestantes.map(JSON.stringify);
+        await redis.rpush("pedidos", ...pedidosParaSalvar);
+      }
+      
+      console.log(`Pedidos do cliente ${nome} excluídos com sucesso.`);
+      res.status(200).json({ success: true, message: `Pedidos do cliente ${nome} excluídos com sucesso.` });
+    }
+
+    // Disparar atualização para o frontend após a exclusão
+    const pedidosStrings = await redis.lrange("pedidos", 0, -1);
+    const entreguesStrings = await redis.lrange("entregues", 0, -1);
+    const pedidos = pedidosStrings.map(JSON.parse);
+    const entregues = entreguesStrings.map(JSON.parse);
+    
+    await pusher.trigger("pedidos-channel", "pedido_update", {
+      pedidos,
+      entregues,
+    });
+
+  } catch (error) {
+    console.error("Erro ao limpar dados no Redis:", error);
+    res.status(500).json({ success: false, error: "Falha ao limpar os dados do Redis." });
+  }
+});
+
+
+
 app.post("/api/webhook/pedido", async (req, res) => {
   const { cliente, pedido, entrega, tipo } = req.body;
 
