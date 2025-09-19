@@ -117,12 +117,12 @@
 
         .info-label {
             font-weight: 600;
-            color: #666;
+            color: #333; /* ALTERADO: Corrigido para cinza escuro */
             font-size: 0.9rem;
         }
 
         .info-value {
-            color: #333;
+            color: #000; /* ALTERADO: Corrigido para preto para máxima legibilidade */
             font-size: 1rem;
         }
         
