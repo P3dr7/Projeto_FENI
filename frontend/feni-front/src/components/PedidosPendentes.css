@@ -1,0 +1,50 @@
+/* Container principal dos status */
+.stats {
+  display: flex; /* Alinha os itens um ao lado do outro */
+  justify-content: space-around; /* Distribui o espaço entre eles */
+  gap: 16px; /* Adiciona um espaço entre os cartões */
+  margin-bottom: 24px; /* Adiciona um espaço abaixo dos cartões */
+}
+
+/* Estilo para cada cartão de status (Pedidos Ativos, Entregues Hoje) */
+.stat-item {
+  flex: 1; /* Faz com que ambos os itens ocupem o mesmo espaço */
+  background-color: #f0f4f8; /* Uma cor de fundo suave, que não é branca */
+  padding: 16px;
+  border-radius: 8px; /* Bordas arredondadas para um visual mais moderno */
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Sombra sutil opcional */
+}
+
+/* Estilo para o número */
+.stat-number {
+  font-size: 2rem; /* Tamanho grande para o número */
+  font-weight: bold;
+  color: #1e293b; /* Cor escura para o número */
+}
+
+/* Estilo para o rótulo */
+.stat-label {
+  font-size: 0.9rem;
+  color: #475569; /* Cor um pouco mais clara para o texto */
+}
+
+/* Estilos gerais que você já deve ter */
+.pedidos-section {
+  padding: 20px;
+}
+
+.section-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+/* Estilos para o estado vazio (quando não há pedidos) */
+.empty-state {
+  text-align: center;
+  padding: 40px;
+  background-color: #fff;
+  border-radius: 8px;
+  margin-top: 20px;
+}

@@ -1,5 +1,6 @@
 import React from 'react';
 import PedidoCard from './PedidoCard';
+import './PedidosPendentes.css';
 
 const PedidosPendentes = ({ pedidos, pedidosEntreguesCount, onMarcarComoEntregue }) => {
   return (
