@@ -21,7 +21,7 @@ function App() {
     
     setIsLoading(true);
     try {
-      const response = await fetch(`${API_URL}/api/pedidos`);
+      const response = await fetch(`${API_URL}api/pedidos`);
       const data = await response.json();
       setPedidosPendentes(data.pedidos || []);
       setPedidosEntregues(data.entregues || []);
