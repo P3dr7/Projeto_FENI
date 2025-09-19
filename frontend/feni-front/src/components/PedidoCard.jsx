@@ -1,6 +1,6 @@
 import React from 'react';
 
-const PedidoCard = ({ pedido, onMarcarComoEntregue }) => {
+const PedidoCard = ({ pedido }) => {
   return (
     <div className="pedido-card">
       <div className="pedido-header">
@@ -10,7 +10,7 @@ const PedidoCard = ({ pedido, onMarcarComoEntregue }) => {
       <div className="pedido-info">
         <div className="info-item">
           <div className="info-label">Pedido</div>
-          <div className="info-value">🍞 {pedido.pedido}</div>
+          <div className="info-value"> {pedido.pedido}</div>
         </div>
         <div className="info-item">
           <div className="info-label">Entrega</div>
@@ -21,13 +21,6 @@ const PedidoCard = ({ pedido, onMarcarComoEntregue }) => {
           <div className="info-value">⏰ {new Date(pedido.timestamp).toLocaleString('pt-BR')}</div>
         </div>
       </div>
-      
-      <button 
-        className="btn-entregue" 
-        onClick={() => onMarcarComoEntregue(pedido.cliente)}
-      >
-        ✅ Marcar como Entregue
-      </button>
     </div>
   );
 };

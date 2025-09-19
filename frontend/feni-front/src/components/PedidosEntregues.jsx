@@ -4,7 +4,7 @@ const PedidosEntregues = ({ pedidos }) => {
   return (
     <div className="entregues-section">
       <div className="section-title">
-        ✅ Entregues Esta Semana
+        ✅ Entregues
       </div>
       <div id="entregues-container">
         {pedidos.length === 0 ? (

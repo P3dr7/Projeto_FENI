@@ -7,7 +7,7 @@ const Header = () => {
         <div className="status-dot"></div>
         <span>N8N Conectado</span>
       </div>
-      <h1>🍞 CRM Teste</h1>
+      <h1> CRM FENI</h1>
       <p>Sistema integrado com WhatsApp via N8N</p>
     </div>
   );
